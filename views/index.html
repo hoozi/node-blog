@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+</head>
+<body>
+	<header>
+		<%if(data.logined){%>
+			<a href="/type_manage">类别管理</a>
+			<a href="/create">创建文章</a>
+			<a href="/logout">退出</a>
+		<%}else{%>
+			<a href="/login">登录</a>
+		<%}%>
+	</header>
+	<div id="content">
+        <section>
+            <h3>文章类别</h3>
+            <ul>
+                <% data.types.forEach(function(type){ %>
+                    <li><a href="/?type=<%=type.id%>"><%=type.title%></a></li>
+                <% }) %>
+            </ul>
+        </section>
+        <section>
+            <h3>博客文章</h3>
+            <ul>
+                <% data.articles.forEach(function(art){%>
+                <li>
+                    <header>
+                        <h4><a target="_blank" href="/article/<%=art.id%>"><%=art.title%></a></h4>
+                        <% var date = new Date(art.updateTime); %>
+                        <span class="time">
+                            <%= date.getFullYear()%>年
+                            <%= date.getMonth()+1%>月
+                            <%= date.getDate()%>日
+                        </span>
+                        <% if(data.logined){ %>
+                        <div class="article_toolbar">
+                            <!-- 删除文章 -->
+                            <a href="/del/<%=art.id%>">删除</a>
+
+                            <!-- 更改文章 -->
+                            <a href="/edit/<%=art.id%>">更改</a>
+                        </div>
+                        <% } %>
+                    </header>
+                    <article>
+                        <!-- 显示部分内容 -->
+                        <%=art.content.slice(0,20)+"......"%>
+                    </article>
+                </li>
+                <% }) %>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        自学成才
+    </footer>
+</body>
+</html>

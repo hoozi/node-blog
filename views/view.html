@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title><%=data.article.title%></title>
+</head>
+<body>
+<h1><%=data.article.title%></h1>
+<%var date = new Date(data.article.createTime);%>
+<p>发布时间:<%=date.getFullYear()%>年<%=date.getMonth()+1%>月<%=date.getDate()%></p>
+<p><img src="/img/<%=data.article.id%>"/></p>
+<p>
+<%=data.article.content%>
+</p>
+</body>
+</html>
